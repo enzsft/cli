@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "lib": ["es7"],
+    "outDir": ".build",
+    "strict": true
+  },
+  "exclude": [".build", "coverage", "node_modules", "**/*.test.ts"],
+  "include": ["src/**/*.ts"]
+}

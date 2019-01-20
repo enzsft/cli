@@ -1,4 +1,4 @@
-import { IOption } from "./IOption";
+import { IOption } from "./types/IOption";
 
 /**
  * Transforms options parsed from argv into options usable by a command

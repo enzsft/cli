@@ -1,8 +1,8 @@
 import parseArgs from "minimist";
 import { CliError } from "./CliError";
-import { ICli } from "./ICli";
-import { ICommand } from "./ICommand";
 import { OptionsTransformer } from "./OptionsTransformer";
+import { ICli } from "./types/ICli";
+import { ICommand } from "./types/ICommand";
 
 /**
  * A CLI to process argv and run commands

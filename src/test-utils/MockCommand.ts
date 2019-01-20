@@ -1,4 +1,4 @@
-import { ICommand } from "../ICommand";
+import { ICommand } from "../types/ICommand";
 
 export interface IMockCommandOptions {
   capitalize: boolean;

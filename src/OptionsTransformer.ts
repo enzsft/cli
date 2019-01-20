@@ -1,5 +1,5 @@
-import { IOption } from "./options/IOption";
-import { OptionType } from "./options/OptionType";
+import { OptionType } from "./OptionType";
+import { IOption } from "./types/IOption";
 
 /**
  * Transforms options parsed from argv into options usable by a command

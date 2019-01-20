@@ -1,7 +1,0 @@
-import { IOption } from "./options/IOption";
-
-export interface ICommand<TOptions> {
-  name: string;
-  options: Array<IOption<unknown>>;
-  handler: (values: string[], options: TOptions) => IterableIterator<string>;
-}

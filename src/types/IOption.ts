@@ -1,4 +1,4 @@
-import { OptionType } from "./OptionType";
+import { OptionType } from "../OptionType";
 
 export interface IOption<TType> {
   name: string;

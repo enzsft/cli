@@ -1,24 +1,29 @@
 import parseArgs from "minimist";
-import { ICli } from "./ICli";
-import { ICommand } from "./ICommand";
+import { Logger } from "./Logger";
 import { OptionsTransformer } from "./OptionsTransformer";
+import { ICli } from "./types/ICli";
+import { ICommand } from "./types/ICommand";
+import { ILogger } from "./types/ILogger";
 
 /**
  * A CLI to process argv and run commands
  */
 export class Cli implements ICli {
   private commands: Array<ICommand<any>>;
+  private logger: ILogger;
 
-  constructor(config: { commands: Array<ICommand<any>> }) {
+  constructor(config: { commands: Array<ICommand<any>>; logger?: ILogger }) {
     this.commands = config.commands;
+    this.logger = config.logger || new Logger();
   }
 
-  public start = (argv: string[]) => {
+  public start = async (argv: string[]) => {
     const { _, ...options } = parseArgs(argv.slice(2));
 
     // Guard against no command
     if (_.length === 0) {
-      throw new Error("Please provide a command 😅");
+      this.logger.error("Please provide a command 😅");
+      return Promise.reject();
     }
 
     const [commandName] = _;
@@ -26,25 +31,15 @@ export class Cli implements ICli {
 
     // Guard against unknown command
     if (!command) {
-      throw new Error(`Command '${commandName}' not recognised 😱`);
+      this.logger.error(`Command '${commandName}' not recognised 😱`);
+      return Promise.reject();
     }
 
     // Capture yielded logs from command
     const optionsTransformer = new OptionsTransformer(command.options);
-    const iterator = command.handler(_.slice(1), optionsTransformer.transform(options));
-    const logs = [];
-
-    while (true) {
-      const { done, value } = iterator.next();
-
-      if (done) {
-        break;
-      }
-
-      logs.push(value);
-    }
+    await command.handler(_.slice(1), optionsTransformer.transform(options));
 
     // Return all yielded logs from the command
-    return Promise.resolve(logs);
+    return Promise.resolve();
   };
 }

@@ -1,7 +1,7 @@
-import { BooleanOption } from "../options/BooleanOption";
-import { NumberOption } from "../options/NumberOption";
-import { StringOption } from "../options/StringOption";
+import { BooleanOption } from "../BooleanOption";
+import { NumberOption } from "../NumberOption";
 import { OptionsTransformer } from "../OptionsTransformer";
+import { StringOption } from "../StringOption";
 
 describe("OptionsTansformer", () => {
   it("should return options as correct types", () => {

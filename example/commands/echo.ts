@@ -1,4 +1,5 @@
-import { BooleanOption, ICommand } from "../../src";
+import { BooleanOption, ICommand } from "../..";
+import { ILogger } from "../services/ILogger";
 
 export interface IEchoOptions {
   capitalize: boolean;
@@ -9,9 +10,13 @@ export class Echo implements ICommand<IEchoOptions> {
 
   public options = [new BooleanOption("capitalize", "c", false, false)];
 
-  public handler = function*(values: string[], options: IEchoOptions) {
+  constructor(public logger: ILogger) {}
+
+  public handler = (values: string[], options: IEchoOptions) => {
     for (const value of values) {
-      yield options.capitalize ? value.toUpperCase() : value;
+      this.logger.log(options.capitalize ? value.toUpperCase() : value);
     }
+
+    return Promise.resolve();
   };
 }

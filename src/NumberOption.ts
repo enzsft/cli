@@ -1,6 +1,9 @@
-import { IOption } from "./IOption";
 import { OptionType } from "./OptionType";
+import { IOption } from "./types/IOption";
 
+/**
+ * Number option, ensures the type injected into a command is a number
+ */
 export class NumberOption implements IOption<number> {
   public type: OptionType;
 

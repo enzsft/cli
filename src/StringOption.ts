@@ -1,6 +1,9 @@
-import { IOption } from "./IOption";
 import { OptionType } from "./OptionType";
+import { IOption } from "./types/IOption";
 
+/**
+ * String option, ensures the type injected into a command is a string
+ */
 export class StringOption implements IOption<string> {
   public type: OptionType;
 

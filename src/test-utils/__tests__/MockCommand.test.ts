@@ -1,27 +1,35 @@
+import { ILogger } from "../../types/ILogger";
 import { MockCommand } from "../MockCommand";
+import { MockLogger } from "../MockLogger";
 
 describe("MockCommand", () => {
-  it("should yield all values", () => {
-    const command = new MockCommand();
-    const values = ["one", "two", "three"];
+  let mockLogger: ILogger;
+  let mockCommand: MockCommand;
 
-    const iterator = command.handler(values, { capitalize: false });
-    for (const value of values) {
-      expect(iterator.next()).toEqual({ done: false, value });
-    }
-
-    expect(iterator.next()).toEqual({ done: true, value: undefined });
+  beforeEach(() => {
+    mockLogger = new MockLogger();
+    mockCommand = new MockCommand(mockLogger);
   });
 
-  it("should yield all values capitalized", () => {
-    const command = new MockCommand();
+  it("should log all values", async () => {
     const values = ["one", "two", "three"];
 
-    const iterator = command.handler(values, { capitalize: true });
-    for (const value of values.map(x => x.toUpperCase())) {
-      expect(iterator.next()).toEqual({ done: false, value });
-    }
+    await mockCommand.handler(values, { capitalize: false });
+    expect(mockLogger.log).toHaveBeenCalledTimes(3);
 
-    expect(iterator.next()).toEqual({ done: true, value: undefined });
+    values.forEach((x, i) => {
+      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x);
+    });
+  });
+
+  it("should yield all values capitalized", async () => {
+    const values = ["one", "two", "three"];
+
+    await mockCommand.handler(values, { capitalize: true });
+    expect(mockLogger.log).toHaveBeenCalledTimes(3);
+
+    values.forEach((x, i) => {
+      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x.toUpperCase());
+    });
   });
 });

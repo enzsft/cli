@@ -10,7 +10,7 @@ export class Echo implements ICommand<IEchoOptions> {
 
   public options = [new BooleanOption("capitalize", "c", false, false)];
 
-  constructor(public logger: ILogger) {}
+  constructor(private logger: ILogger) {}
 
   public handler = (values: string[], options: IEchoOptions) => {
     for (const value of values) {

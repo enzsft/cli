@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "example": "ts-node example/index.ts",
     "lint": "tslint 'src/**/*.ts'",
     "test": "jest"
   },

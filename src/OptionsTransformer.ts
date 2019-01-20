@@ -1,4 +1,5 @@
-import { IOption } from "./types/IOption";
+import { IOption } from "./options/IOption";
+import { OptionType } from "./options/OptionType";
 
 /**
  * Transforms options parsed from argv into options usable by a command
@@ -44,7 +45,7 @@ export class OptionsTransformer {
     }, {});
 
     // Fill in default options
-    const defaultOptions = this.commandOptions.reduce((acc, next) => ({ ...acc, [next.name]: next.default }), {});
+    const defaultOptions = this.commandOptions.reduce((acc, next) => ({ ...acc, [next.name]: next.defaultValue }), {});
 
     return {
       ...defaultOptions,
@@ -55,13 +56,13 @@ export class OptionsTransformer {
   /**
    * Return function to cast
    */
-  private getTypeFactory = (type: string) => {
+  private getTypeFactory = (type: OptionType) => {
     switch (type) {
-      case "boolean":
+      case OptionType.boolean:
         return (x: string) => x !== "false";
-      case "number":
+      case OptionType.number:
         return (x: string) => parseFloat(x);
-      case "string":
+      case OptionType.string:
         return (x: string) => x;
       default:
         throw new Error(`Type '${type}' is not supported 😭`);

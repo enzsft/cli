@@ -1,4 +1,4 @@
-import { IOption } from "./IOption";
+import { IOption } from "./options/IOption";
 
 export interface ICommand<TOptions> {
   name: string;

@@ -1,5 +1,6 @@
 import { Cli } from "../Cli";
-import { buildArgv, MockCommand } from "../test-utils";
+import { buildArgv } from "../test-utils/buildArgv";
+import { MockCommand } from "../test-utils/MockCommand";
 
 describe("Cli", () => {
   const cli = new Cli({

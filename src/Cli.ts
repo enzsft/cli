@@ -1,8 +1,7 @@
 import parseArgs from "minimist";
-import { CliError } from "./CliError";
+import { ICli } from "./ICli";
+import { ICommand } from "./ICommand";
 import { OptionsTransformer } from "./OptionsTransformer";
-import { ICli } from "./types/ICli";
-import { ICommand } from "./types/ICommand";
 
 /**
  * A CLI to process argv and run commands
@@ -19,7 +18,7 @@ export class Cli implements ICli {
 
     // Guard against no command
     if (_.length === 0) {
-      throw new CliError("Please provide a command 😅");
+      throw new Error("Please provide a command 😅");
     }
 
     const [commandName] = _;
@@ -27,7 +26,7 @@ export class Cli implements ICli {
 
     // Guard against unknown command
     if (!command) {
-      throw new CliError(`Command '${commandName}' not recognised 😱`);
+      throw new Error(`Command '${commandName}' not recognised 😱`);
     }
 
     // Capture yielded logs from command

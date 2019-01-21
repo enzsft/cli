@@ -3,7 +3,7 @@
   "version": "1.0.0-alpha.1",
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "./scripts/build.sh",
     "example": "ts-node example/index.ts",
     "lint": "tslint 'src/**/*.ts'",
     "test": "jest"
@@ -27,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build && yarn lint && yarn test --coverage"
+      "pre-commit": "./scripts/precommit.sh"
     }
   }
 }

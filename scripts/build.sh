@@ -6,7 +6,7 @@ set -e
 rm -rf .build
 
 # Build code
-tsc
+tsc --declaration
 
 # Copy files
 cp README.md .build/README.md

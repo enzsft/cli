@@ -1,12 +1,12 @@
 {
   "name": "@enzsft/cli",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "license": "MIT",
   "scripts": {
     "build": "./scripts/build.sh",
     "example": "ts-node example/index.ts",
     "lint": "tslint 'src/**/*.ts'",
-    "prepublishOnly": "./scripts/quality-check.sh",
+    "npm-publish": "./scripts/publish.sh",
     "test": "jest"
   },
   "dependencies": {

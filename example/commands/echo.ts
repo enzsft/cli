@@ -1,22 +1,18 @@
-import { BooleanOption, ICommand } from "../..";
-import { ILogger } from "../services/ILogger";
+import { createBooleanOption, ICommand } from "../..";
+import { ILogger } from "../services/logger";
 
-export interface IEchoOptions {
+export interface IEchoCommandOptions {
   capitalize: boolean;
 }
 
-export class Echo implements ICommand<IEchoOptions> {
-  public name = "echo";
-
-  public options = [new BooleanOption("capitalize", "c", false, false)];
-
-  constructor(private logger: ILogger) {}
-
-  public handler = (values: string[], options: IEchoOptions) => {
+export const createEchoCommand = (logger: ILogger): ICommand<IEchoCommandOptions> => ({
+  handler: (values: string[], options: IEchoCommandOptions) => {
     for (const value of values) {
-      this.logger.log(options.capitalize ? value.toUpperCase() : value);
+      logger.log(options.capitalize ? value.toUpperCase() : value);
     }
 
     return Promise.resolve();
-  };
-}
+  },
+  name: "echo",
+  options: [createBooleanOption("capitalize", "c", false, false)],
+});

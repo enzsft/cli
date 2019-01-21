@@ -1,13 +1,18 @@
 // tslint:disable no-console
 
-import { ILogger } from "./types/ILogger";
+export interface ILogger {
+  error: (message?: any) => void;
+  info: (message?: any) => void;
+  log: (message?: any) => void;
+  warn: (message?: any) => void;
+}
 
 /**
  * Simple logger
  */
-export class Logger implements ILogger {
-  public error = console.error;
-  public info = console.info;
-  public log = console.log;
-  public warn = console.warn;
-}
+export const createLogger = (): ILogger => ({
+  error: console.error,
+  info: console.info,
+  log: console.log,
+  warn: console.warn,
+});

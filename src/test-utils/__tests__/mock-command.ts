@@ -1,14 +1,15 @@
-import { ILogger } from "../../types/ILogger";
-import { MockCommand } from "../MockCommand";
-import { MockLogger } from "../MockLogger";
+import { ICommand } from "../../commands";
+import { ILogger } from "../../logger";
+import { createMockCommand, IMockCommandOptions } from "../mock-command";
+import { createMockLogger } from "../mock-logger";
 
 describe("MockCommand", () => {
   let mockLogger: ILogger;
-  let mockCommand: MockCommand;
+  let mockCommand: ICommand<IMockCommandOptions>;
 
   beforeEach(() => {
-    mockLogger = new MockLogger();
-    mockCommand = new MockCommand(mockLogger);
+    mockLogger = createMockLogger();
+    mockCommand = createMockCommand(mockLogger);
   });
 
   it("should log all values", async () => {

@@ -1,1 +1,1 @@
-export { buildArgv } from "./src/test-utils/buildArgv";
+export { buildArgv } from "./src/test-utils/argv";

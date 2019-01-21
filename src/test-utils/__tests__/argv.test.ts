@@ -1,4 +1,4 @@
-import { buildArgv } from "../buildArgv";
+import { buildArgv } from "../argv";
 
 describe("buildArgv", () => {
   it("should construct argv array", () => {

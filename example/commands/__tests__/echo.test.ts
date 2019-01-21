@@ -1,27 +1,27 @@
-import { Cli } from "../../..";
+import { createCli, ICommand } from "../../..";
 import { buildArgv } from "../../../test-utils";
-import { ILogger } from "../../services/ILogger";
-import { Echo } from "../Echo";
+import { ILogger } from "../../services/logger";
+import { createEchoCommand, IEchoCommandOptions } from "../echo";
 
-export class MockLogger implements ILogger {
-  public error = jest.fn();
-  public info = jest.fn();
-  public log = jest.fn();
-  public warn = jest.fn();
-}
+const createMockLogger = (): ILogger => ({
+  error: jest.fn(),
+  info: jest.fn(),
+  log: jest.fn(),
+  warn: jest.fn(),
+});
 
 describe("Echo", () => {
   const values = ["one", "two", "three"];
   let mockLogger: ILogger;
-  let echoCommand: Echo;
+  let echoCommand: ICommand<IEchoCommandOptions>;
 
   beforeEach(() => {
-    mockLogger = new MockLogger();
-    echoCommand = new Echo(mockLogger);
+    mockLogger = createMockLogger();
+    echoCommand = createEchoCommand(mockLogger);
   });
 
   it("should echo all values back", async () => {
-    const cli = new Cli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand] });
 
     await cli.start(buildArgv(`echo ${values.join(" ")}`));
 
@@ -32,7 +32,7 @@ describe("Echo", () => {
   });
 
   it("should echo all values back capitalized", async () => {
-    const cli = new Cli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand] });
 
     await cli.start(buildArgv(`echo ${values.join(" ")} --capitalize`));
 
@@ -43,7 +43,7 @@ describe("Echo", () => {
   });
 
   it("should echo all values back capitalized", async () => {
-    const cli = new Cli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand] });
 
     await cli.start(buildArgv(`echo ${values.join(" ")} -c`));
 

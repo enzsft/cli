@@ -1,20 +1,21 @@
-import { Cli } from "../Cli";
-import { buildArgv } from "../test-utils/buildArgv";
-import { MockCommand } from "../test-utils/MockCommand";
-import { MockLogger } from "../test-utils/MockLogger";
-import { ICli } from "../types/ICli";
-import { ILogger } from "../types/ILogger";
+import { createCli, ICli } from "../cli";
+import { ILogger } from "../logger";
+import { buildArgv } from "../test-utils/argv";
+import { createMockCommand } from "../test-utils/mock-command";
+import { createMockLogger } from "../test-utils/mock-logger";
 
 describe("Cli", () => {
   let mockLogger: ILogger;
   let cli: ICli;
 
   beforeEach(() => {
-    mockLogger = new MockLogger();
-    cli = new Cli({
-      commands: [new MockCommand(mockLogger)],
-      logger: mockLogger,
-    });
+    mockLogger = createMockLogger();
+    cli = createCli(
+      {
+        commands: [createMockCommand(mockLogger)],
+      },
+      mockLogger,
+    );
   });
 
   it("should inform user and reject if no command is provided", async () => {
@@ -47,7 +48,9 @@ describe("Cli", () => {
       await cli.start(buildArgv(unknownCommand));
     } catch (error) {
       expect(mockLogger.error).toHaveBeenCalledTimes(1);
-      expect(mockLogger.error).toHaveBeenCalledWith(`Command '${unknownCommand}' not recognised 😱`);
+      expect(mockLogger.error).toHaveBeenCalledWith(
+        `Command '${unknownCommand}' not recognised 😱`,
+      );
     }
   });
 

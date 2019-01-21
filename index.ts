@@ -1,10 +1,11 @@
-export { Cli } from "./src/Cli";
-export { ICli } from "./src/types/ICli";
+export { createCli, ICli } from "./src/cli";
 
-export { ICommand } from "./src/types/ICommand";
+export { ICommand } from "./src/commands";
 
-export { IOption } from "./src/types/IOption";
-export { OptionType } from "./src/OptionType";
-export { BooleanOption } from "./src/BooleanOption";
-export { NumberOption } from "./src/NumberOption";
-export { StringOption } from "./src/StringOption";
+export {
+  createBooleanOption,
+  createNumberOption,
+  createStringOption,
+  IOption,
+  OptionType,
+} from "./src/options";

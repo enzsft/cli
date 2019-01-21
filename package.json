@@ -6,6 +6,7 @@
     "build": "./scripts/build.sh",
     "example": "ts-node example/index.ts",
     "lint": "tslint 'src/**/*.ts'",
+    "prepublishOnly": "./scripts/quality-check.sh",
     "test": "jest"
   },
   "dependencies": {
@@ -27,7 +28,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "./scripts/precommit.sh"
+      "pre-commit": "./scripts/quality-check.sh"
     }
   }
 }

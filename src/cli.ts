@@ -8,7 +8,7 @@ export interface ICli {
 }
 
 export const createCli = (
-  config: { commands: Array<ICommand<any>> },
+  config: { commands: Array<ICommand<any>>; description: string },
   logger: ILogger = createLogger(),
 ): ICli => ({
   start: async (argv: string[]) => {
@@ -16,6 +16,18 @@ export const createCli = (
 
     // Guard against no command
     if (_.length === 0) {
+      // May be asking for version
+      if (options.version || options.v) {
+        logger.log(process.env.npm_package_version);
+        return Promise.resolve();
+      }
+
+      // May be asking for help
+      if (options.help || options.h) {
+        logger.log(config.description);
+        return Promise.resolve();
+      }
+
       logger.error("Please provide a command 😅");
       return Promise.reject();
     }

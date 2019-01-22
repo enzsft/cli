@@ -4,15 +4,17 @@ import { buildArgv } from "../test-utils/argv";
 import { createMockCommand } from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
-describe("Cli", () => {
+describe("cli", () => {
   let mockLogger: ILogger;
   let cli: ICli;
+  const cliDescription = "cli-description";
 
   beforeEach(() => {
     mockLogger = createMockLogger();
     cli = createCli(
       {
         commands: [createMockCommand(mockLogger)],
+        description: cliDescription,
       },
       mockLogger,
     );
@@ -69,5 +71,33 @@ describe("Cli", () => {
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
     expect(mockLogger.log).toHaveBeenCalledWith(value.toUpperCase());
+  });
+
+  it("should output the executing package version", async () => {
+    await cli.start(buildArgv("--version"));
+
+    expect(mockLogger.log).toHaveBeenCalledTimes(1);
+    expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
+  });
+
+  it("should output the executing package version", async () => {
+    await cli.start(buildArgv("-v"));
+
+    expect(mockLogger.log).toHaveBeenCalledTimes(1);
+    expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
+  });
+
+  it("should output the cli description", async () => {
+    await cli.start(buildArgv("--help"));
+
+    expect(mockLogger.log).toHaveBeenCalledTimes(1);
+    expect(mockLogger.log).toHaveBeenCalledWith(cliDescription);
+  });
+
+  it("should output the cli description", async () => {
+    await cli.start(buildArgv("-h"));
+
+    expect(mockLogger.log).toHaveBeenCalledTimes(1);
+    expect(mockLogger.log).toHaveBeenCalledWith(cliDescription);
   });
 });

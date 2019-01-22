@@ -14,6 +14,7 @@ describe("Echo", () => {
   const values = ["one", "two", "three"];
   let mockLogger: ILogger;
   let echoCommand: ICommand<IEchoCommandOptions>;
+  const description = "cli-description";
 
   beforeEach(() => {
     mockLogger = createMockLogger();
@@ -21,7 +22,7 @@ describe("Echo", () => {
   });
 
   it("should echo all values back", async () => {
-    const cli = createCli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand], description });
 
     await cli.start(buildArgv(`echo ${values.join(" ")}`));
 
@@ -32,7 +33,7 @@ describe("Echo", () => {
   });
 
   it("should echo all values back capitalized", async () => {
-    const cli = createCli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand], description });
 
     await cli.start(buildArgv(`echo ${values.join(" ")} --capitalize`));
 
@@ -43,7 +44,7 @@ describe("Echo", () => {
   });
 
   it("should echo all values back capitalized", async () => {
-    const cli = createCli({ commands: [echoCommand] });
+    const cli = createCli({ commands: [echoCommand], description });
 
     await cli.start(buildArgv(`echo ${values.join(" ")} -c`));
 

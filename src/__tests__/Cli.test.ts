@@ -1,19 +1,22 @@
 import { createCli, ICli } from "../cli";
+import { ICommand } from "../commands";
 import { ILogger } from "../logger";
 import { buildArgv } from "../test-utils/argv";
-import { createMockCommand } from "../test-utils/mock-command";
+import { createMockCommand, IMockCommandOptions } from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
 describe("cli", () => {
   let mockLogger: ILogger;
+  let mockCommand: ICommand<IMockCommandOptions>;
   let cli: ICli;
   const cliDescription = "cli-description";
 
   beforeEach(() => {
     mockLogger = createMockLogger();
+    mockCommand = createMockCommand(mockLogger);
     cli = createCli(
       {
-        commands: [createMockCommand(mockLogger)],
+        commands: [mockCommand],
         description: cliDescription,
       },
       mockLogger,
@@ -73,31 +76,45 @@ describe("cli", () => {
     expect(mockLogger.log).toHaveBeenCalledWith(value.toUpperCase());
   });
 
-  it("should output the executing package version", async () => {
+  it("should output the executing package version (longhand)", async () => {
     await cli.start(buildArgv("--version"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
     expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
   });
 
-  it("should output the executing package version", async () => {
+  it("should output the executing package version (shorthand)", async () => {
     await cli.start(buildArgv("-v"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
     expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
   });
 
-  it("should output the cli description", async () => {
+  it("should output the cli help (longhand)", async () => {
     await cli.start(buildArgv("--help"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(cliDescription);
+
+    // Type escape hatch to obtain mock
+    const mockLog: any = mockLogger.log;
+    const log = mockLog.mock.calls[0][0];
+
+    expect(log.includes(cliDescription)).toBe(true);
+    expect(log.includes(mockCommand.name)).toBe(true);
+    expect(log.includes(mockCommand.description)).toBe(true);
   });
 
-  it("should output the cli description", async () => {
+  it("should output the cli help (shorthand)", async () => {
     await cli.start(buildArgv("-h"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(cliDescription);
+
+    // Type escape hatch to obtain mock
+    const mockLog: any = mockLogger.log;
+    const log = mockLog.mock.calls[0][0];
+
+    expect(log.includes(cliDescription)).toBe(true);
+    expect(log.includes(mockCommand.name)).toBe(true);
+    expect(log.includes(mockCommand.description)).toBe(true);
   });
 });

@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "esModuleInterop": true,
-    "lib": ["es7"],
+    "lib": ["es2017"],
     "outDir": ".build",
     "strict": true
   },

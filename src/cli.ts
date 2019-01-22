@@ -24,7 +24,15 @@ export const createCli = (
 
       // May be asking for help
       if (options.help || options.h) {
-        logger.log(config.description);
+        const indent = "    ";
+        logger.log(`
+${config.description}
+
+Commands:
+   
+${config.commands.map(x => `${indent}${x.name.padEnd(15)}${x.description}`).join(`\n`)}
+`);
+
         return Promise.resolve();
       }
 

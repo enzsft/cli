@@ -10,6 +10,7 @@ export interface IMockCommandOptions {
  * Mock command for tests
  */
 export const createMockCommand = (logger: ILogger): ICommand<IMockCommandOptions> => ({
+  description: "A mock command for tests",
   handler: (values: string[], options: IMockCommandOptions) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);

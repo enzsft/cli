@@ -10,6 +10,7 @@ describe("cli", () => {
   let mockCommand: ICommand<IMockCommandOptions>;
   let cli: ICli;
   const cliDescription = "cli-description";
+  const cliName = "cli-name";
 
   beforeEach(() => {
     mockLogger = createMockLogger();
@@ -18,6 +19,7 @@ describe("cli", () => {
       {
         commands: [mockCommand],
         description: cliDescription,
+        name: cliName,
       },
       mockLogger,
     );
@@ -38,7 +40,7 @@ describe("cli", () => {
     expect.assertions(2);
 
     try {
-      await cli.start(["test", "index.js"]);
+      await cli.start(["node", cliName]);
     } catch (error) {
       expect(mockLogger.error).toHaveBeenCalledTimes(1);
       expect(mockLogger.error).toHaveBeenCalledWith("Please provide a command 😅");
@@ -99,6 +101,7 @@ describe("cli", () => {
     const mockLog: any = mockLogger.log;
     const log = mockLog.mock.calls[0][0];
 
+    expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
@@ -113,6 +116,7 @@ describe("cli", () => {
     const mockLog: any = mockLogger.log;
     const log = mockLog.mock.calls[0][0];
 
+    expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);

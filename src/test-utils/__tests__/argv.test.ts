@@ -2,6 +2,6 @@ import { buildArgv } from "../argv";
 
 describe("buildArgv", () => {
   it("should construct argv array", () => {
-    expect(buildArgv("command")).toEqual(["test", "index.js", "command"]);
+    expect(buildArgv("command")).toEqual(["node", "index.js", "command"]);
   });
 });

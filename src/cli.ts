@@ -8,7 +8,7 @@ export interface ICli {
 }
 
 export const createCli = (
-  config: { commands: Array<ICommand<any>>; description: string },
+  config: { commands: Array<ICommand<any>>; description: string; name: string },
   logger: ILogger = createLogger(),
 ): ICli => ({
   start: async (argv: string[]) => {
@@ -27,6 +27,8 @@ export const createCli = (
         const indent = "    ";
         logger.log(`
 ${config.description}
+
+Usage: ${config.name} [command] [options...]
 
 Commands:
    

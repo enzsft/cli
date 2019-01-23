@@ -1,6 +1,6 @@
 {
   "name": "@enzsft/cli",
-  "version": "1.0.0-alpha.7",
+  "version": "1.0.0-alpha.8",
   "description": "Build multi command CLI tools with ease. 😲",
   "keywords": [
     "cli",
@@ -9,6 +9,11 @@
     "parse"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enzsft/cli"
+  },
+  "author": "Enzyme Software",
   "scripts": {
     "build": "./scripts/build.sh",
     "example": "ts-node example/index.ts",

@@ -126,11 +126,11 @@ Options are parsed from `argv` and then injected into the executing command's ha
 
 ## Built with TypeScript with 💖.
 
-TypeScript type definitions are bundled in with the module. No need to install an additional module for type definitions.
+[TypeScript](https://www.typescriptlang.org/) type definitions are bundled in with the module. No need to install an additional module for type definitions.
 
 ## Testing your commands 🧪
 
-_All examples use_ ✌️
+_All examples use [Jest](https://jestjs.io/)_ ✌️
 
 This library was build with testing commands in mind. We believe in testing your commands as closely to how a user would use them as possible!
 
@@ -241,3 +241,7 @@ describe("BETTER TESTS... In our opinion 😁", () => {
   });
 });
 ```
+
+## Alternatives 😽
+
+My favourites are [Yargs](https://www.npmjs.com/package/yargs) and [Commander](https://www.npmjs.com/package/commander). They're awesome, check them out! This library was written mainly the solve the testing issue explained above.

@@ -221,7 +221,7 @@ describe("BETTER TESTS... In our opinion 😁", () => {
 
     expect(mockLogger.log).toHaveBeenCalledTimes(2);
     values.forEach((x, i) => {
-      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x);
+      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x.toUpperCase());
     });
   });
 
@@ -236,7 +236,7 @@ describe("BETTER TESTS... In our opinion 😁", () => {
 
     expect(mockLogger.log).toHaveBeenCalledTimes(2);
     values.forEach((x, i) => {
-      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x);
+      expect(mockLogger.log).toHaveBeenNthCalledWith(i + 1, x.toUpperCase());
     });
   });
 });

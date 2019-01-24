@@ -30,7 +30,7 @@ const echoCommand = {
   name: "echo",
   description: "Echo's back string values. Optionally capitalize them.",
   options: [createBooleanOption("capitalize", "c", false, false)],
-  handler: (values: string[], options) => {
+  handler: (values, options) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);
     }
@@ -105,7 +105,7 @@ const command = {
   name: "", // If 2 commands names match, the command registered first will win
   description: "",
   options: [],
-  handler: () => Promise.resolve(), // Should always return a promise
+  handler: (values, options) => Promise.resolve(), // Should always return a promise
 };
 ```
 
@@ -143,7 +143,7 @@ export const createEchoCommand = logger => ({
   name: "echo",
   description: "Echo's back string values.",
   options: [createBooleanOption("capitalize", "c", false, false)],
-  handler: (values: string[], options: IEchoCommandOptions) => {
+  handler: (values, options) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);
     }

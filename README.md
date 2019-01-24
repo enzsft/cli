@@ -79,14 +79,7 @@ import { createCli } from "@enzsft/cli";
 const cli = createCli({
   name: "", // Should match the executable name so `--help` docs are correct.
   description: "",
-  commands: [
-    {
-      name: "",
-      description: "",
-      options: [],
-      handler: () => Promise.resolve(),
-    },
-  ],
+  commands: [],
 });
 ```
 

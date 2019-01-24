@@ -32,7 +32,7 @@ const echoCommand = {
   options: [createBooleanOption("capitalize", "c", false, false)],
   handler: (values, options) => {
     for (const value of values) {
-      logger.log(options.capitalize ? value.toUpperCase() : value);
+      console.log(options.capitalize ? value.toUpperCase() : value);
     }
 
     return Promise.resolve();
@@ -125,7 +125,7 @@ Options are parsed from `argv` and then injected into the executing command's ha
 
 _All examples use [Jest](https://jestjs.io/)_ ✌️
 
-This library was build with testing commands in mind. We believe in testing your commands as closely to how a user would use them as possible!
+This library was built with testing in mind. We believe in testing your commands as closely to how a user would use them as possible!
 
 Take the following command:
 
@@ -146,7 +146,7 @@ export const createEchoCommand = logger => ({
 });
 ```
 
-We want to ensure the commands options are wired up correctly when testing this. This means we can't just run the handler in our tests and inject the options like:
+We want to ensure the commands options are wired up correctly when testing. This means we can't just run the handler in our tests and inject the options like:
 
 ```js
 describe("BAD TESTS... In our opinion 😅", () => {
@@ -180,7 +180,7 @@ describe("BAD TESTS... In our opinion 😅", () => {
 
 Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass if we changed the shorthand value for the capitalize option from `"c"` to `"b"`.
 
-In order to combat this we provide a simple test utility function that allows us to invoke the command closer to how a user does! With a command string!
+In order to combat this we provide a simple test utility function, `buildArgv`. hat allows us to invoke the command closer to how a user does! With a command string!
 
 ```js
 import { createCli } from "@enzsft/cli";

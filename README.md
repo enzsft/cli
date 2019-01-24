@@ -178,7 +178,7 @@ describe("BAD TESTS... In our opinion 😅", () => {
 });
 ```
 
-Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass with we changed the shorthand value for the capitalize option from `"c"` to `"b"`.
+Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass if we changed the shorthand value for the capitalize option from `"c"` to `"b"`.
 
 In order to combat this we provide a simple test utility function that allows us to invoke the command closer to how a user does! With a command string!
 
@@ -237,4 +237,4 @@ describe("BETTER TESTS... In our opinion 😁", () => {
 
 ## Alternatives 😽
 
-My favourites are [Yargs](https://www.npmjs.com/package/yargs) and [Commander](https://www.npmjs.com/package/commander). They're awesome, check them out! This library was written mainly the solve the testing issue explained above.
+Our favourites are [Yargs](https://www.npmjs.com/package/yargs) and [Commander](https://www.npmjs.com/package/commander). They're awesome, check them out! This library was written mainly the solve the testing issue explained above.

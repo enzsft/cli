@@ -5,6 +5,8 @@
 </div>
 <hr />
 
+Building multi command CLI tools should be easy. We've written **@enzsft/cli** to ensure you can get up and running writing one as quickly as possible. It handles executing commands, parsing options and validating options 🧐. 
+
 ## Getting started 🏎
 
 Getting up and running is fast! ⚡️

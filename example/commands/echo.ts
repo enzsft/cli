@@ -19,11 +19,11 @@ export const createEchoCommand = (
   name: "echo",
   options: [
     createBooleanOption({
+      altName: "c",
       defaultValue: false,
       description: "Capitalize all string values.",
       name: "capitalize",
       required: false,
-      shorthand: "c",
     }),
   ],
 });

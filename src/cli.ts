@@ -2,6 +2,7 @@ import parseArgs from "minimist";
 import { ICommand } from "./commands";
 import { createLogger, ILogger } from "./logger";
 import { transformParsedOptions } from "./options";
+import { getHighestLength } from "./utils";
 
 export interface ICli {
   start: (argv: string[]) => Promise<void>;
@@ -25,15 +26,29 @@ export const createCli = (
       // May be asking for help
       if (options.help || options.h) {
         const indent = "    ";
+        const commandWidth = getHighestLength(config.commands.map(x => x.name));
+
         logger.log(`
 ${config.description}
 
 Usage: ${config.name} [command] [options...]
 
 Commands:
-   
+
 ${config.commands
-          .map(x => `${indent}${x.name.padEnd(15)}${x.description}`)
+          .map(
+            x => `${indent}${x.name.padEnd(commandWidth)}${indent}${
+              x.description
+            }
+${x.options.map(
+              o =>
+                `
+${indent}${"".padEnd(commandWidth)}${indent}--${o.name} (-${o.altName}) ${
+                  o.description
+                }`,
+            )}
+`,
+          )
           .join(`\n`)}
 `);
 

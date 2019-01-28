@@ -6,6 +6,14 @@ export interface IMockCommandOptions {
   capitalize: boolean;
 }
 
+export const mockOption = createBooleanOption({
+  altName: "c",
+  defaultValue: false,
+  description: "mock-description",
+  name: "capitalize",
+  required: false,
+});
+
 /**
  * Mock command for tests
  */
@@ -21,13 +29,5 @@ export const createMockCommand = (
     return Promise.resolve();
   },
   name: "mock",
-  options: [
-    createBooleanOption({
-      defaultValue: false,
-      description: "mock-description",
-      name: "capitalize",
-      required: false,
-      shorthand: "c",
-    }),
-  ],
+  options: [mockOption],
 });

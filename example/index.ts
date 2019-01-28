@@ -3,7 +3,11 @@ import { createEchoCommand } from "./commands/echo";
 import { createLogger } from "./services/Logger";
 
 const cli = createCli({
-  commands: [createEchoCommand(createLogger())],
+  commands: [
+    createEchoCommand(createLogger()),
+    createEchoCommand(createLogger()),
+    createEchoCommand(createLogger()),
+  ],
   description: "Example CLI tool build with @enzsft/cli",
   name: "example",
 });

@@ -5,7 +5,7 @@
 </div>
 <hr />
 
-Building multi command CLI tools should be easy. We've written **@enzsft/cli** to ensure you can get up and running writing one as quickly as possible. It handles executing commands, parsing options and validating options 🧐. 
+Building multi command CLI tools should be easy. We've written **@enzsft/cli** to ensure you can get up and running writing one as quickly as possible. It handles executing commands, parsing options and validating options 🧐.
 
 ## Getting started 🏎
 
@@ -34,7 +34,7 @@ const echoCommand = {
   options: [
     createBooleanOption({
       name: "capitalize",
-      shorthand: "c",
+      altName: "c",
       description: "Capitalize all values.",
       required: false,
       defaultValue: false,
@@ -124,21 +124,21 @@ import {
 const options = [
   createBooleanOption({
     name: "bool",
-    shorthand: "b",
+    altName: "b",
     description: "Some boolean option.",
     required: false,
     defaultValue: false,
   }),
   createNumberOption({
     name: "number",
-    shorthand: "n",
+    altName: "n",
     description: "Some number option.",
     required: false,
     defaultValue: 1,
   }),
   createStringOption({
     name: "string",
-    shorthand: "b",
+    altName: "b",
     description: "Some string option.",
     required: false,
     defaultValue: "hello world",
@@ -169,7 +169,7 @@ export const createEchoCommand = logger => ({
   options: [
     createBooleanOption({
       name: "capitalize",
-      shorthand: "c",
+      altName: "c",
       description: "Capitalize all values.",
       required: false,
       defaultValue: false,
@@ -217,7 +217,7 @@ describe("BAD TESTS... In our opinion 😅", () => {
 });
 ```
 
-Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass if we changed the shorthand value for the capitalize option from `"c"` to `"b"`.
+Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass if we changed the alternative name for the capitalize option from `"c"` to `"b"`.
 
 In order to combat this we provide a simple test utility function, `buildArgv`. hat allows us to invoke the command closer to how a user does! With a command string!
 
@@ -242,7 +242,7 @@ describe("BETTER TESTS... In our opinion 😁", () => {
     });
   });
 
-  it("should echo the values capitalized (longhand)", async () => {
+  it("should echo the values capitalized (name)", async () => {
     const mockLogger = { log: jest.fn() };
     const command = createEchoCommand(mockLogger);
     const cli = createCli({ commands: [command], description, name });
@@ -257,7 +257,7 @@ describe("BETTER TESTS... In our opinion 😁", () => {
     });
   });
 
-  it("should echo the values capitalized (shorthand)", async () => {
+  it("should echo the values capitalized (alternative name)", async () => {
     const mockLogger = { log: jest.fn() };
     const command = createEchoCommand(mockLogger);
     const cli = createCli({ commands: [command], description, name });

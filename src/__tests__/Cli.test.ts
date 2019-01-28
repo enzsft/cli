@@ -5,6 +5,7 @@ import { buildArgv } from "../test-utils/argv";
 import {
   createMockCommand,
   IMockCommandOptions,
+  mockOption,
 } from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
@@ -85,7 +86,7 @@ describe("cli", () => {
     expect(mockLogger.log).toHaveBeenCalledWith(value.toUpperCase());
   });
 
-  it("should output the executing package version (longhand)", async () => {
+  it("should output the executing package version (name)", async () => {
     await cli.start(buildArgv("--version"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
@@ -94,7 +95,7 @@ describe("cli", () => {
     );
   });
 
-  it("should output the executing package version (shorthand)", async () => {
+  it("should output the executing package version (alternative name)", async () => {
     await cli.start(buildArgv("-v"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
@@ -103,7 +104,7 @@ describe("cli", () => {
     );
   });
 
-  it("should output the cli help (longhand)", async () => {
+  it("should output the cli help (name)", async () => {
     await cli.start(buildArgv("--help"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
@@ -116,9 +117,12 @@ describe("cli", () => {
     expect(log.includes(cliDescription)).toBe(true);
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
+    expect(log.includes(`--${mockOption.name}`)).toBe(true);
+    expect(log.includes(`-${mockOption.altName}`)).toBe(true);
+    expect(log.includes(mockOption.description)).toBe(true);
   });
 
-  it("should output the cli help (shorthand)", async () => {
+  it("should output the cli help (alternative name)", async () => {
     await cli.start(buildArgv("-h"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
@@ -131,5 +135,8 @@ describe("cli", () => {
     expect(log.includes(cliDescription)).toBe(true);
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
+    expect(log.includes(`--${mockOption.name}`)).toBe(true);
+    expect(log.includes(`-${mockOption.altName}`)).toBe(true);
+    expect(log.includes(mockOption.description)).toBe(true);
   });
 });

@@ -5,19 +5,19 @@ export enum OptionType {
 }
 
 export interface IOption<TType> {
+  altName: string;
   description: string;
   name: string;
   parse: (value: string) => TType;
-  shorthand: string;
   type: OptionType;
   required: boolean;
   defaultValue?: TType;
 }
 
 export interface IOptionConfig<TType> {
+  altName: string;
   description: string;
   name: string;
-  shorthand: string;
   required: boolean;
   defaultValue?: TType;
 }
@@ -56,9 +56,9 @@ export const transformParsedOptions = (
   // Options names provided
   const providedNames = Object.keys(options);
 
-  // Some may be shorthand so transform them into full names
+  // Some may be alternative names so transform them into names
   const refinedNames = providedNames.map(x => {
-    const option = commandOptions.find(s => s.name === x || s.shorthand === x);
+    const option = commandOptions.find(s => s.name === x || s.altName === x);
 
     return option && option.name;
   });

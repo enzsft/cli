@@ -5,7 +5,7 @@ export enum OptionType {
 }
 
 export interface IOption<TType> {
-  altName: string;
+  altName?: string;
   description: string;
   name: string;
   parse: (value: string) => TType;
@@ -15,7 +15,7 @@ export interface IOption<TType> {
 }
 
 export interface IOptionConfig<TType> {
-  altName: string;
+  altName?: string;
   description: string;
   name: string;
   required: boolean;

@@ -1,5 +1,5 @@
-import { createCli, ICommand } from "../../..";
-import { buildArgv } from "../../../test-utils";
+import { createCli, ICommand } from "../../.."; // ... from "@enzsft/cli"
+import { buildArgv } from "../../../test-utils"; // ... from "@enzsft/cli/test-utils"
 import { ILogger } from "../../services/logger";
 import { createEchoCommand, IEchoCommandOptions } from "../echo";
 

@@ -5,7 +5,9 @@ import { buildArgv } from "../test-utils/argv";
 import {
   createMockCommand,
   IMockCommandOptions,
-  mockOption,
+  mockBooleanOption,
+  mockNumberOption,
+  mockStringOption,
 } from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
@@ -113,13 +115,31 @@ describe("cli", () => {
     const mockLog: any = mockLogger.log;
     const log = mockLog.mock.calls[0][0];
 
+    // CLI
     expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
+
+    // Command
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
-    expect(log.includes(`--${mockOption.name}`)).toBe(true);
-    expect(log.includes(`-${mockOption.altName}`)).toBe(true);
-    expect(log.includes(mockOption.description)).toBe(true);
+
+    // Options
+    expect(
+      log.includes(
+        `--${mockBooleanOption.name}, --${mockBooleanOption.altName}`,
+      ),
+    ).toBe(true);
+    expect(log.includes(mockBooleanOption.description)).toBe(true);
+
+    expect(
+      log.includes(`--${mockNumberOption.name}, --${mockNumberOption.altName}`),
+    ).toBe(true);
+    expect(log.includes(``)).toBe(true);
+    expect(log.includes(mockNumberOption.description)).toBe(true);
+
+    // No alternative name
+    expect(log.includes(`--${mockStringOption.name}`)).toBe(true);
+    expect(log.includes(mockStringOption.description)).toBe(true);
   });
 
   it("should output the cli help (alternative name)", async () => {
@@ -131,12 +151,30 @@ describe("cli", () => {
     const mockLog: any = mockLogger.log;
     const log = mockLog.mock.calls[0][0];
 
+    // CLI
     expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
+
+    // Command
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
-    expect(log.includes(`--${mockOption.name}`)).toBe(true);
-    expect(log.includes(`-${mockOption.altName}`)).toBe(true);
-    expect(log.includes(mockOption.description)).toBe(true);
+
+    // Options
+    expect(
+      log.includes(
+        `--${mockBooleanOption.name}, --${mockBooleanOption.altName}`,
+      ),
+    ).toBe(true);
+    expect(log.includes(mockBooleanOption.description)).toBe(true);
+
+    expect(
+      log.includes(`--${mockNumberOption.name}, --${mockNumberOption.altName}`),
+    ).toBe(true);
+    expect(log.includes(``)).toBe(true);
+    expect(log.includes(mockNumberOption.description)).toBe(true);
+
+    // No alternative name
+    expect(log.includes(`--${mockStringOption.name}`)).toBe(true);
+    expect(log.includes(mockStringOption.description)).toBe(true);
   });
 });

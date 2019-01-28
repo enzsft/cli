@@ -1,4 +1,4 @@
-import { createBooleanOption, ICommand } from "../..";
+import { createBooleanOption, ICommand } from "../.."; // ... from "@enzsft/cli"
 import { ILogger } from "../services/logger";
 
 export interface IEchoCommandOptions {

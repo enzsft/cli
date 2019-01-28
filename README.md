@@ -69,8 +69,9 @@ node index.js --help
 #
 # Commands:
 #
-#     echo           Echo's back string values. Optionally capitalize them.
-#                    --capitalize (-c) Capitalize all values.
+#     echo    Echo's back string values. Optionally capitalize them.
+#
+#             --capitalize, --c    Capitalize all values.
 
 node index.js echo hello
 # hello

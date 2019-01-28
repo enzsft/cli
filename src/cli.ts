@@ -26,8 +26,23 @@ export const createCli = (
       // May be asking for help
       if (options.help || options.h) {
         const indent = "    ";
+        // Align commands descriptions on the right
         const commandWidth = getHighestLength(config.commands.map(x => x.name));
 
+        // Align option descriptions on the right
+        const optionWidths: { [key: string]: number } = config.commands.reduce(
+          (acc, next) => ({
+            ...acc,
+            [next.name]: getHighestLength(
+              next.options.map(
+                x => `--${x.name}${x.altName ? `, --${x.altName}` : ""}`,
+              ),
+            ),
+          }),
+          {},
+        );
+
+        // Brace yourself... formatted CLI output coming right up!
         logger.log(`
 ${config.description}
 
@@ -40,13 +55,15 @@ ${config.commands
             x => `${indent}${x.name.padEnd(commandWidth)}${indent}${
               x.description
             }
-${x.options.map(
-              o =>
-                `
-${indent}${"".padEnd(commandWidth)}${indent}--${o.name} (-${o.altName}) ${
-                  o.description
-                }`,
-            )}
+${x.options
+              .map(
+                o =>
+                  `
+${indent}${"".padEnd(commandWidth)}${indent}${`--${o.name}${
+                    o.altName ? `, --${o.altName}` : ""
+                  }`.padEnd(optionWidths[x.name])}${indent}${o.description}`,
+              )
+              .join("")}
 `,
           )
           .join(`\n`)}
@@ -68,13 +85,12 @@ ${indent}${"".padEnd(commandWidth)}${indent}--${o.name} (-${o.altName}) ${
       return Promise.reject();
     }
 
-    // Capture yielded logs from command
+    // Execute command
     await command.handler(
       _.slice(1),
       transformParsedOptions(options, command.options),
     );
 
-    // Return all yielded logs from the command
     return Promise.resolve();
   },
 });

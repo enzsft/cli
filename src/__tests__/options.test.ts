@@ -8,7 +8,13 @@ import {
 
 describe("boolean option", () => {
   it("createBooleanOption() should create a boolean option", () => {
-    const option = createBooleanOption("mock", "m", false, true);
+    const option = createBooleanOption({
+      defaultValue: true,
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option).toMatchObject({
       defaultValue: true,
@@ -20,7 +26,13 @@ describe("boolean option", () => {
   });
 
   it("should parse boolean correctly", () => {
-    const option = createBooleanOption("mock", "m", false, true);
+    const option = createBooleanOption({
+      defaultValue: true,
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option.parse("true")).toBe(true);
     expect(option.parse("123")).toBe(true);
@@ -31,10 +43,17 @@ describe("boolean option", () => {
 
 describe("number option", () => {
   it("createNumberOption() should create a number option", () => {
-    const option = createNumberOption("mock", "m", false, 123);
+    const option = createNumberOption({
+      defaultValue: 123,
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option).toMatchObject({
       defaultValue: 123,
+      description: "mock-description",
       name: "mock",
       required: false,
       shorthand: "m",
@@ -43,7 +62,12 @@ describe("number option", () => {
   });
 
   it("should parse number correctly", () => {
-    const option = createNumberOption("mock", "m", false, 123);
+    const option = createNumberOption({
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option.parse("1")).toBe(1);
     expect(option.parse("")).toBe(NaN);
@@ -54,10 +78,17 @@ describe("number option", () => {
 
 describe("string option", () => {
   it("createStringOption() should create a string option", () => {
-    const option = createStringOption("mock", "m", false, "default-value");
+    const option = createStringOption({
+      defaultValue: "default-value",
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option).toMatchObject({
       defaultValue: "default-value",
+      description: "mock-description",
       name: "mock",
       required: false,
       shorthand: "m",
@@ -66,7 +97,13 @@ describe("string option", () => {
   });
 
   it("should parse string correctly", () => {
-    const option = createStringOption("mock", "m", false, "default-value");
+    const option = createStringOption({
+      defaultValue: "default-value",
+      description: "mock-description",
+      name: "mock",
+      required: false,
+      shorthand: "m",
+    });
 
     expect(option.parse("")).toBe("");
     expect(option.parse("hello")).toBe("hello");
@@ -85,9 +122,24 @@ describe("transformParsedOptions", () => {
           cc: "1",
         },
         [
-          createBooleanOption("aa", "a", false),
-          createStringOption("bb", "b", false),
-          createNumberOption("cc", "c", false),
+          createBooleanOption({
+            description: "mock-description",
+            name: "aa",
+            required: false,
+            shorthand: "a",
+          }),
+          createStringOption({
+            description: "mock-description",
+            name: "bb",
+            required: false,
+            shorthand: "b",
+          }),
+          createNumberOption({
+            description: "mock-description",
+            name: "cc",
+            required: false,
+            shorthand: "c",
+          }),
         ],
       ),
     ).toEqual({
@@ -98,30 +150,73 @@ describe("transformParsedOptions", () => {
   });
 
   it("should return options with default values", () => {
-    expect(transformParsedOptions({}, [createBooleanOption("aa", "a", false, true)])).toEqual({
+    expect(
+      transformParsedOptions({}, [
+        createBooleanOption({
+          defaultValue: true,
+          description: "mock-description",
+          name: "aa",
+          required: false,
+          shorthand: "a",
+        }),
+      ]),
+    ).toEqual({
       aa: true,
     });
 
     expect(
-      transformParsedOptions({ aa: "" }, [createBooleanOption("aa", "a", false, true)]),
+      transformParsedOptions({ aa: "" }, [
+        createBooleanOption({
+          defaultValue: true,
+          description: "mock-description",
+          name: "aa",
+          required: false,
+          shorthand: "a",
+        }),
+      ]),
     ).toEqual({
       aa: true,
     });
   });
 
   it("should throw if required option is not provided", () => {
-    expect(() => transformParsedOptions({}, [createBooleanOption("aa", "a", true)])).toThrowError();
+    expect(() =>
+      transformParsedOptions({}, [
+        createBooleanOption({
+          description: "mock-description",
+          name: "aa",
+          required: true,
+          shorthand: "a",
+        }),
+      ]),
+    ).toThrowError();
   });
 
   it("should transform shorthand option into full name options", () => {
-    expect(transformParsedOptions({ a: "true" }, [createBooleanOption("aa", "a", false)])).toEqual({
+    expect(
+      transformParsedOptions({ a: "true" }, [
+        createBooleanOption({
+          description: "mock-description",
+          name: "aa",
+          required: false,
+          shorthand: "a",
+        }),
+      ]),
+    ).toEqual({
       aa: true,
     });
   });
 
   it("should ignore unknown options", () => {
     expect(
-      transformParsedOptions({ aa: true, bb: "unknown" }, [createBooleanOption("aa", "a", false)]),
+      transformParsedOptions({ aa: true, bb: "unknown" }, [
+        createBooleanOption({
+          description: "mock-description",
+          name: "aa",
+          required: false,
+          shorthand: "a",
+        }),
+      ]),
     ).toEqual({
       aa: true,
     });

@@ -29,7 +29,15 @@ import { createCli, createBooleanOption } from "@enzsft/cli";
 const echoCommand = {
   name: "echo",
   description: "Echo's back string values. Optionally capitalize them.",
-  options: [createBooleanOption("capitalize", "c", false, false)],
+  options: [
+    createBooleanOption({
+      name: "capitalize",
+      shorthand: "c",
+      description: "Capitalize all values.",
+      required: false,
+      defaultValue: false,
+    }),
+  ],
   handler: (values, options) => {
     for (const value of values) {
       console.log(options.capitalize ? value.toUpperCase() : value);
@@ -60,7 +68,7 @@ node index.js --help
 # Commands:
 #
 #     echo           Echo's back string values. Optionally capitalize them.
-#                    --capitalize (-c) Capitalize values.
+#                    --capitalize (-c) Capitalize all values.
 
 node index.js echo hello
 # hello
@@ -105,13 +113,34 @@ const command = {
 ### Creating options
 
 ```js
-import { createBooleanOption, createNumberOption, createStringOption } from "@enzsft/cli";
+import {
+  createBooleanOption,
+  createNumberOption,
+  createStringOption,
+} from "@enzsft/cli";
 
-// createXXXOption(name, shorthand, required, default?)
 const options = [
-  createBooleanOption("bool", "b", false, false),
-  createNumberOption("number", "n", false, 1),
-  createStringOption("string", "s", false, "hello world"),
+  createBooleanOption({
+    name: "bool",
+    shorthand: "b",
+    description: "Some boolean option.",
+    required: false,
+    defaultValue: false,
+  }),
+  createNumberOption({
+    name: "number",
+    shorthand: "n",
+    description: "Some number option.",
+    required: false,
+    defaultValue: 1,
+  }),
+  createStringOption({
+    name: "string",
+    shorthand: "b",
+    description: "Some string option.",
+    required: false,
+    defaultValue: "hello world",
+  }),
 ];
 ```
 
@@ -135,7 +164,15 @@ import { createBooleanOption } from "@enzsft/cli";
 export const createEchoCommand = logger => ({
   name: "echo",
   description: "Echo's back string values.",
-  options: [createBooleanOption("capitalize", "c", false, false)],
+  options: [
+    createBooleanOption({
+      name: "capitalize",
+      shorthand: "c",
+      description: "Capitalize all values.",
+      required: false,
+      defaultValue: false,
+    }),
+  ],
   handler: (values, options) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);

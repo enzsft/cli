@@ -32,7 +32,9 @@ Usage: ${config.name} [command] [options...]
 
 Commands:
    
-${config.commands.map(x => `${indent}${x.name.padEnd(15)}${x.description}`).join(`\n`)}
+${config.commands
+          .map(x => `${indent}${x.name.padEnd(15)}${x.description}`)
+          .join(`\n`)}
 `);
 
         return Promise.resolve();
@@ -52,7 +54,10 @@ ${config.commands.map(x => `${indent}${x.name.padEnd(15)}${x.description}`).join
     }
 
     // Capture yielded logs from command
-    await command.handler(_.slice(1), transformParsedOptions(options, command.options));
+    await command.handler(
+      _.slice(1),
+      transformParsedOptions(options, command.options),
+    );
 
     // Return all yielded logs from the command
     return Promise.resolve();

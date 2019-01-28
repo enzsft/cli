@@ -5,6 +5,7 @@ export enum OptionType {
 }
 
 export interface IOption<TType> {
+  description: string;
   name: string;
   parse: (value: string) => TType;
   shorthand: string;
@@ -13,45 +14,35 @@ export interface IOption<TType> {
   defaultValue?: TType;
 }
 
+export interface IOptionConfig<TType> {
+  description: string;
+  name: string;
+  shorthand: string;
+  required: boolean;
+  defaultValue?: TType;
+}
+
 export const createBooleanOption = (
-  name: string,
-  shorthand: string,
-  required: boolean,
-  defaultValue?: boolean,
+  config: IOptionConfig<boolean>,
 ): IOption<boolean> => ({
-  defaultValue,
-  name,
+  ...config,
   parse: (x: string) => x !== "false",
-  required,
-  shorthand,
   type: OptionType.boolean,
 });
 
 export const createNumberOption = (
-  name: string,
-  shorthand: string,
-  required: boolean,
-  defaultValue?: number,
+  config: IOptionConfig<number>,
 ): IOption<number> => ({
-  defaultValue,
-  name,
+  ...config,
   parse: (x: string) => parseFloat(x),
-  required,
-  shorthand,
   type: OptionType.number,
 });
 
 export const createStringOption = (
-  name: string,
-  shorthand: string,
-  required: boolean,
-  defaultValue?: string,
+  config: IOptionConfig<string>,
 ): IOption<string> => ({
-  defaultValue,
-  name,
+  ...config,
   parse: (x: string) => x,
-  required,
-  shorthand,
   type: OptionType.string,
 });
 

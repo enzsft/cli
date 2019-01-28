@@ -9,7 +9,9 @@ export interface IMockCommandOptions {
 /**
  * Mock command for tests
  */
-export const createMockCommand = (logger: ILogger): ICommand<IMockCommandOptions> => ({
+export const createMockCommand = (
+  logger: ILogger,
+): ICommand<IMockCommandOptions> => ({
   description: "A mock command for tests",
   handler: (values: string[], options: IMockCommandOptions) => {
     for (const value of values) {
@@ -19,5 +21,13 @@ export const createMockCommand = (logger: ILogger): ICommand<IMockCommandOptions
     return Promise.resolve();
   },
   name: "mock",
-  options: [createBooleanOption("capitalize", "c", false, false)],
+  options: [
+    createBooleanOption({
+      defaultValue: false,
+      description: "mock-description",
+      name: "capitalize",
+      required: false,
+      shorthand: "c",
+    }),
+  ],
 });

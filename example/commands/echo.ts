@@ -5,7 +5,9 @@ export interface IEchoCommandOptions {
   capitalize: boolean;
 }
 
-export const createEchoCommand = (logger: ILogger): ICommand<IEchoCommandOptions> => ({
+export const createEchoCommand = (
+  logger: ILogger,
+): ICommand<IEchoCommandOptions> => ({
   description: "Echo's back string values.",
   handler: (values: string[], options: IEchoCommandOptions) => {
     for (const value of values) {
@@ -15,5 +17,13 @@ export const createEchoCommand = (logger: ILogger): ICommand<IEchoCommandOptions
     return Promise.resolve();
   },
   name: "echo",
-  options: [createBooleanOption("capitalize", "c", false, false)],
+  options: [
+    createBooleanOption({
+      defaultValue: false,
+      description: "Capitalize all string values.",
+      name: "capitalize",
+      required: false,
+      shorthand: "c",
+    }),
+  ],
 });

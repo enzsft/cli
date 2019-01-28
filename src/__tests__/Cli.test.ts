@@ -2,7 +2,10 @@ import { createCli, ICli } from "../cli";
 import { ICommand } from "../commands";
 import { ILogger } from "../logger";
 import { buildArgv } from "../test-utils/argv";
-import { createMockCommand, IMockCommandOptions } from "../test-utils/mock-command";
+import {
+  createMockCommand,
+  IMockCommandOptions,
+} from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
 describe("cli", () => {
@@ -32,7 +35,9 @@ describe("cli", () => {
       await cli.start(buildArgv(""));
     } catch (error) {
       expect(mockLogger.error).toHaveBeenCalledTimes(1);
-      expect(mockLogger.error).toHaveBeenCalledWith("Please provide a command 😅");
+      expect(mockLogger.error).toHaveBeenCalledWith(
+        "Please provide a command 😅",
+      );
     }
   });
 
@@ -43,7 +48,9 @@ describe("cli", () => {
       await cli.start(["node", cliName]);
     } catch (error) {
       expect(mockLogger.error).toHaveBeenCalledTimes(1);
-      expect(mockLogger.error).toHaveBeenCalledWith("Please provide a command 😅");
+      expect(mockLogger.error).toHaveBeenCalledWith(
+        "Please provide a command 😅",
+      );
     }
   });
 
@@ -82,14 +89,18 @@ describe("cli", () => {
     await cli.start(buildArgv("--version"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
+    expect(mockLogger.log).toHaveBeenCalledWith(
+      process.env.npm_package_version,
+    );
   });
 
   it("should output the executing package version (shorthand)", async () => {
     await cli.start(buildArgv("-v"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(process.env.npm_package_version);
+    expect(mockLogger.log).toHaveBeenCalledWith(
+      process.env.npm_package_version,
+    );
   });
 
   it("should output the cli help (longhand)", async () => {

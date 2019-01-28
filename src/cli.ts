@@ -43,6 +43,7 @@ export const createCli = (
         );
 
         // Brace yourself... formatted CLI output coming right up!
+        // This is one of the few places prettier lets us down 😢
         logger.log(`
 ${config.description}
 
@@ -51,9 +52,9 @@ Options:
 ${indent}--help, --h   ${indent}Display tool help.
 ${indent}--version, --v${indent}Display tool version.
 
-Commands:
-
 Usage: ${config.name} [command] [options...]
+
+Commands:
 
 ${config.commands
           .map(

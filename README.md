@@ -65,6 +65,11 @@ node index.js --help
 #
 # Echos back string values. Optionally capitalize them.
 #
+# Options:
+#
+#     --help, --h       Display tool help.
+#     --version, --v    Display tool version.
+#
 # Usage: example [command] [options...]
 #
 # Commands:

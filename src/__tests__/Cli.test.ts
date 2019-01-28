@@ -119,11 +119,15 @@ describe("cli", () => {
     expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
 
+    // CLI options
+    expect(log.includes("--help, --h       Display tool help.")).toBe(true);
+    expect(log.includes("--version, --v    Display tool version.")).toBe(true);
+
     // Command
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
 
-    // Options
+    // Command options
     expect(
       log.includes(
         `--${mockBooleanOption.name}, --${mockBooleanOption.altName}`,
@@ -155,11 +159,15 @@ describe("cli", () => {
     expect(log.includes(`Usage: ${cliName} [command] [options...]`)).toBe(true);
     expect(log.includes(cliDescription)).toBe(true);
 
+    // CLI options
+    expect("--help, --h       Display tool help.");
+    expect("--version, --v    Display the tool version.");
+
     // Command
     expect(log.includes(mockCommand.name)).toBe(true);
     expect(log.includes(mockCommand.description)).toBe(true);
 
-    // Options
+    // Command options
     expect(
       log.includes(
         `--${mockBooleanOption.name}, --${mockBooleanOption.altName}`,

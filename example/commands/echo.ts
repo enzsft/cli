@@ -8,7 +8,7 @@ export interface IEchoCommandOptions {
 export const createEchoCommand = (
   logger: ILogger,
 ): ICommand<IEchoCommandOptions> => ({
-  description: "Echo's back string values.",
+  description: "Echos back string values.",
   handler: (values: string[], options: IEchoCommandOptions) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);

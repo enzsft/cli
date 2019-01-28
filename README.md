@@ -30,7 +30,7 @@ import { createCli, createBooleanOption } from "@enzsft/cli";
 
 const echoCommand = {
   name: "echo",
-  description: "Echo's back string values. Optionally capitalize them.",
+  description: "Echos back string values. Optionally capitalize them.",
   options: [
     createBooleanOption({
       name: "capitalize",
@@ -63,13 +63,13 @@ cli.start(process.argv).catch(() => process.exit(1));
 ```bash
 node index.js --help
 #
-# Echo's back string values. Optionally capitalize them.
+# Echos back string values. Optionally capitalize them.
 #
 # Usage: example [command] [options...]
 #
 # Commands:
 #
-#     echo    Echo's back string values. Optionally capitalize them.
+#     echo    Echos back string values. Optionally capitalize them.
 #
 #             --capitalize, --c    Capitalize all values.
 
@@ -166,7 +166,7 @@ import { createBooleanOption } from "@enzsft/cli";
 
 export const createEchoCommand = logger => ({
   name: "echo",
-  description: "Echo's back string values.",
+  description: "Echos back string values.",
   options: [
     createBooleanOption({
       name: "capitalize",

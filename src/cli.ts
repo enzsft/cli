@@ -46,9 +46,14 @@ export const createCli = (
         logger.log(`
 ${config.description}
 
-Usage: ${config.name} [command] [options...]
+Options:
+
+${indent}--help, --h   ${indent}Display tool help.
+${indent}--version, --v${indent}Display tool version.
 
 Commands:
+
+Usage: ${config.name} [command] [options...]
 
 ${config.commands
           .map(

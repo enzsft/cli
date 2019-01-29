@@ -2,6 +2,7 @@
   <h1>@enzsft/cli</h1>
   <h1>😲</h1>
   <h3>Build multi command CLI tools with ease.</h3>
+  [![Build Status](https://travis-ci.org/enzsft/cli.svg?branch=master)](https://travis-ci.org/enzsft/cli)
 </div>
 <hr />
 

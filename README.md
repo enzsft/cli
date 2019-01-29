@@ -2,7 +2,12 @@
   <h1>@enzsft/cli</h1>
   <h1>😲</h1>
   <h3>Build multi command CLI tools with ease.</h3>
-  [![Build Status](https://travis-ci.org/enzsft/cli.svg?branch=master)](https://travis-ci.org/enzsft/cli)
+  <a href='https://travis-ci.org/enzsft/cli'>
+    <img src="https://travis-ci.org/enzsft/cli.svg?branch=master" alt="Build Status" />
+  </a>
+  <a href='https://coveralls.io/github/enzsft/cli?branch=master'>
+    <img src='https://coveralls.io/repos/github/enzsft/cli/badge.svg?branch=master' alt='Coverage Status' />
+  </a>
 </div>
 <hr />
 

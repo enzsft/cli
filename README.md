@@ -243,7 +243,7 @@ describe("BAD TESTS... In our opinion 😅", () => {
 
 Ok, so the above tests aren't "BAD TESTS"! They assert all the behaviour of the handler well enough. They'll even result in 100% test coverage! However... We injected a perfect options object each time. These tests would still pass if we changed the alternative name for the capitalize option from `"c"` to `"b"`.
 
-In order to combat this we provide a simple test utility function, `buildArgv`. hat allows us to invoke the command closer to how a user does! With a command string!
+In order to combat this we provide a simple test utility function, `buildArgv`. This allows us to invoke the command just how a user does! With a command string!
 
 ```js
 import { createCli } from "@enzsft/cli";

@@ -1,27 +1,80 @@
+/**
+ * Possible types of options.
+ */
 export enum OptionType {
   boolean = "boolean",
   number = "number",
   string = "string",
 }
 
+/**
+ * An option.
+ */
 export interface IOption<TType> {
+  /**
+   * An alternative name an option can be referenced by. This is output
+   * in --help,
+   */
   altName?: string;
+  /**
+   * A description of the option. This is output in --help,
+   */
   description: string;
+  /**
+   * The name of the option. This is output in --help,
+   */
   name: string;
+  /**
+   * Parse option from a string parsed from Argv into the specified type.
+   */
   parse: (value: string) => TType;
+  /**
+   * The type to parse the option to when it is injected into the
+   * commands handler.
+   */
   type: OptionType;
+  /**
+   * Whether the option is required or not.
+   */
   required: boolean;
+  /**
+   * The default value of the option if it not provided via Argv.
+   */
   defaultValue?: TType;
 }
 
+/**
+ * Config to build an option.
+ */
 export interface IOptionConfig<TType> {
+  /**
+   * An alternative name an option can be referenced by. This is output
+   * in --help,
+   */
   altName?: string;
+  /**
+   * A description of the option. This is output in --help,
+   */
   description: string;
+  /**
+   * The name of the option. This is output in --help,
+   */
   name: string;
+  /**
+   * Whether the option is required or not.
+   */
   required: boolean;
+  /**
+   * The default value of the option if it not provided via Argv.
+   */
   defaultValue?: TType;
 }
 
+/**
+ * Create a boolean option.
+ *
+ * @param config
+ */
 export const createBooleanOption = (
   config: IOptionConfig<boolean>,
 ): IOption<boolean> => ({
@@ -30,6 +83,11 @@ export const createBooleanOption = (
   type: OptionType.boolean,
 });
 
+/**
+ * Create a boolean option.
+ *
+ * @param config
+ */
 export const createNumberOption = (
   config: IOptionConfig<number>,
 ): IOption<number> => ({
@@ -38,6 +96,11 @@ export const createNumberOption = (
   type: OptionType.number,
 });
 
+/**
+ * Create a boolean option.
+ *
+ * @param config
+ */
 export const createStringOption = (
   config: IOptionConfig<string>,
 ): IOption<string> => ({
@@ -48,6 +111,9 @@ export const createStringOption = (
 
 /**
  * Transform an options object parsed from argv into an options object usable by a command
+ *
+ * @param options
+ * @param commandOptions
  */
 export const transformParsedOptions = (
   options: { [arg: string]: any },

@@ -8,10 +8,22 @@
   <a href='https://coveralls.io/github/enzsft/cli?branch=master'>
     <img src='https://coveralls.io/repos/github/enzsft/cli/badge.svg?branch=master' alt='Coverage Status' />
   </a>
+  <a href="https://www.npmjs.com/package/@enzsft/cli">
+    <img src="https://badge.fury.io/js/%40enzsft%2Fcli.svg" alt="npm version">
+  </a>
+  <img alt="undefined" src="https://img.shields.io/github/languages/top/enzsft/cli.svg?style=flat">
 </div>
 <hr />
 
-Building multi command CLI tools should be easy. We've written **@enzsft/cli** to ensure you can get up and running writing one as quickly as possible. It handles executing commands, parsing options and validating options 🧐.
+Building multi command CLI tools should be easy. We've written **@enzsft/cli** to ensure you can get up and running writing one as quickly as possible. It handles executing commands, parsing options and validating options.
+
+## Motivation 🧐
+
+A pain building CLI tools with existing libraries has always been the inability to fully test the commands you configure as a user would use them.
+
+So our biggest goal building this library was to provide a super easy way to test commands as a whole, not just the handler functions, and in a way that matches how a user would. We have a section on testing your commands in this README!
+
+We also wanted to provide a codebase that leveraging modern JavaScript and provides simpler types than alternatives via TypeScript.
 
 ## Getting started 🏎
 
@@ -160,7 +172,7 @@ const options = [
 
 Options are parsed from `argv` and then injected into the executing command's handler function. When they are injected they are converted into the correct type.
 
-## Built with TypeScript with 💖.
+## Built with TypeScript with 💖
 
 [TypeScript](https://www.typescriptlang.org/) type definitions are bundled in with the module. No need to install an additional module for type definitions.
 

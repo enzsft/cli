@@ -1,6 +1,6 @@
 {
   "name": "@enzsft/cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Build multi command CLI tools with ease. 😲",
   "keywords": [
     "cli",
@@ -17,7 +17,7 @@
   "scripts": {
     "build": "./scripts/build.sh",
     "example": "ts-node example/index.ts",
-    "lint": "tslint 'src/**/*.ts'",
+    "lint": "tslint 'src/**/*.ts' --project ./tsconfig.json",
     "npm-publish": "./scripts/publish.sh",
     "test": "jest"
   },

@@ -6,7 +6,13 @@ import {
   createStringOption,
 } from "../options";
 
+/**
+ * Mock comands options
+ */
 export interface IMockCommandOptions {
+  /**
+   * Should the values be aptizalized.
+   */
   capitalize: boolean;
 }
 

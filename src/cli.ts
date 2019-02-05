@@ -43,7 +43,7 @@ export const createCli = (
   config: ICliConfig,
   logger: ILogger = createLogger(),
 ): ICli => ({
-  start: async (argv: string[]) => {
+  start: async (argv: string[]): Promise<void> => {
     const { _, ...options } = parseArgs(argv.slice(2));
 
     // Guard against no command
@@ -88,22 +88,20 @@ Usage: ${config.name} [command] [options...]
 Commands:
 
 ${config.commands
-          .map(
-            x => `${indent}${x.name.padEnd(commandWidth)}${indent}${
-              x.description
-            }
+  .map(
+    x => `${indent}${x.name.padEnd(commandWidth)}${indent}${x.description}
 ${x.options
-              .map(
-                o =>
-                  `
+  .map(
+    o =>
+      `
 ${indent}${"".padEnd(commandWidth)}${indent}${`--${o.name}${
-                    o.altName ? `, --${o.altName}` : ""
-                  }`.padEnd(optionWidths[x.name])}${indent}${o.description}`,
-              )
-              .join("")}
+        o.altName ? `, --${o.altName}` : ""
+      }`.padEnd(optionWidths[x.name])}${indent}${o.description}`,
+  )
+  .join("")}
 `,
-          )
-          .join(`\n`)}
+  )
+  .join(`\n`)}
 `);
 
         return Promise.resolve();

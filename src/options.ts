@@ -79,7 +79,7 @@ export const createBooleanOption = (
   config: IOptionConfig<boolean>,
 ): IOption<boolean> => ({
   ...config,
-  parse: (x: string) => x !== "false",
+  parse: (x: string): boolean => x !== "false",
   type: OptionType.boolean,
 });
 
@@ -92,7 +92,7 @@ export const createNumberOption = (
   config: IOptionConfig<number>,
 ): IOption<number> => ({
   ...config,
-  parse: (x: string) => parseFloat(x),
+  parse: (x: string): number => parseFloat(x),
   type: OptionType.number,
 });
 
@@ -105,7 +105,7 @@ export const createStringOption = (
   config: IOptionConfig<string>,
 ): IOption<string> => ({
   ...config,
-  parse: (x: string) => x,
+  parse: (x: string): string => x,
   type: OptionType.string,
 });
 
@@ -118,7 +118,7 @@ export const createStringOption = (
 export const transformParsedOptions = (
   options: { [arg: string]: any },
   commandOptions: Array<IOption<unknown>>,
-) => {
+): { [arg: string]: any } => {
   // Options names provided
   const providedNames = Object.keys(options);
 

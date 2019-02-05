@@ -46,7 +46,7 @@ export const createMockCommand = (
   logger: ILogger,
 ): ICommand<IMockCommandOptions> => ({
   description: "A mock command for tests",
-  handler: (values: string[], options: IMockCommandOptions) => {
+  handler: (values: string[], options: IMockCommandOptions): Promise<void> => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);
     }

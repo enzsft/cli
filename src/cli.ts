@@ -50,7 +50,7 @@ export const createCli = (
     if (_.length === 0) {
       // May be asking for version
       if (options.version || options.v) {
-        logger.log(process.env.npm_package_version);
+        logger.log(require("../package.json").version);
         return Promise.resolve();
       }
 

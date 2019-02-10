@@ -11,6 +11,10 @@ import {
 } from "../test-utils/mock-command";
 import { createMockLogger } from "../test-utils/mock-logger";
 
+jest.mock("../../package.json", () => ({
+  version: "1.0.0",
+}));
+
 describe("cli", () => {
   let mockLogger: ILogger;
   let mockCommand: ICommand<IMockCommandOptions>;
@@ -92,18 +96,14 @@ describe("cli", () => {
     await cli.start(buildArgv("--version"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(
-      process.env.npm_package_version,
-    );
+    expect(mockLogger.log).toHaveBeenCalledWith("1.0.0");
   });
 
   it("should output the executing package version (alternative name)", async () => {
     await cli.start(buildArgv("-v"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(
-      process.env.npm_package_version,
-    );
+    expect(mockLogger.log).toHaveBeenCalledWith("1.0.0");
   });
 
   it("should output the cli help (name)", async () => {

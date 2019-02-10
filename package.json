@@ -1,6 +1,6 @@
 {
   "name": "@enzsft/cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Build multi command CLI tools with ease. 😲",
   "keywords": [
     "cli",

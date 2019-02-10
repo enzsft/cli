@@ -71,6 +71,7 @@ const cli = createCli({
   name: "example",
   description: "Example CLI tool build with @enzsft/cli",
   commands: [echoCommand],
+  version: "1.0.0",
 });
 
 cli.start(process.argv).catch(() => process.exit(1));
@@ -114,6 +115,7 @@ const cli = createCli({
   name: "", // Should match the executable name so `--help` docs are correct.
   description: "",
   commands: [],
+  version: require("./package.json").version, // Useful to use your package version
 });
 ```
 
@@ -253,7 +255,12 @@ describe("BETTER TESTS... In our opinion 😁", () => {
   it("should echo the values", async () => {
     const mockLogger = { log: jest.fn() };
     const command = createEchoCommand(mockLogger);
-    const cli = createCli({ commands: [command], description, name });
+    const cli = createCli({
+      commands: [command],
+      description,
+      name,
+      version: "1.0.0",
+    });
 
     // Invoke the command via its name and
     // pass values like you would in the terminal
@@ -269,7 +276,12 @@ describe("BETTER TESTS... In our opinion 😁", () => {
   it("should echo the values capitalized (name)", async () => {
     const mockLogger = { log: jest.fn() };
     const command = createEchoCommand(mockLogger);
-    const cli = createCli({ commands: [command], description, name });
+    const cli = createCli({
+      commands: [command],
+      description,
+      name,
+      version: "1.0.0",
+    });
 
     // Yay we can pass the option in like a user would now!
     const values = ["one", "two"];
@@ -284,7 +296,12 @@ describe("BETTER TESTS... In our opinion 😁", () => {
   it("should echo the values capitalized (alternative name)", async () => {
     const mockLogger = { log: jest.fn() };
     const command = createEchoCommand(mockLogger);
-    const cli = createCli({ commands: [command], description, name });
+    const cli = createCli({
+      commands: [command],
+      description,
+      name,
+      version: "1.0.0",
+    });
 
     // Yay we can pass the option in like a user would now!
     const values = ["one", "two"];

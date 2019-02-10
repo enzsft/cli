@@ -1,5 +1,4 @@
 import parseArgs from "minimist";
-import { resolve } from "path";
 import { ICommand } from "./commands";
 import { createLogger, ILogger } from "./logger";
 import { transformParsedOptions } from "./options";
@@ -32,6 +31,10 @@ export interface ICliConfig {
    * executable name.
    */
   name: string;
+  /**
+   * Version of the CLI tool. This is output in --version
+   */
+  version: string;
 }
 
 /**
@@ -51,7 +54,7 @@ export const createCli = (
     if (_.length === 0) {
       // May be asking for version
       if (options.version || options.v) {
-        logger.log(require(resolve(process.cwd(), "package.json")).version);
+        logger.log(config.version);
         return Promise.resolve();
       }
 

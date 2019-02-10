@@ -1,4 +1,3 @@
-import { resolve } from "path";
 import { createCli, ICli } from "../cli";
 import { ICommand } from "../commands";
 import { ILogger } from "../logger";
@@ -27,6 +26,7 @@ describe("cli", () => {
         commands: [mockCommand],
         description: cliDescription,
         name: cliName,
+        version: "1.0.0",
       },
       mockLogger,
     );
@@ -93,18 +93,14 @@ describe("cli", () => {
     await cli.start(buildArgv("--version"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(
-      require(resolve(process.cwd(), "package.json")).version,
-    );
+    expect(mockLogger.log).toHaveBeenCalledWith("1.0.0");
   });
 
   it("should output the executing package version (alternative name)", async () => {
     await cli.start(buildArgv("-v"));
 
     expect(mockLogger.log).toHaveBeenCalledTimes(1);
-    expect(mockLogger.log).toHaveBeenCalledWith(
-      require(resolve(process.cwd(), "package.json")).version,
-    );
+    expect(mockLogger.log).toHaveBeenCalledWith("1.0.0");
   });
 
   it("should output the cli help (name)", async () => {

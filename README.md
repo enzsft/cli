@@ -5,8 +5,8 @@
   <a href='https://travis-ci.org/enzsft/cli'>
     <img src="https://travis-ci.org/enzsft/cli.svg?branch=master" alt="Build Status" />
   </a>
-  <a href='https://coveralls.io/github/enzsft/cli?branch=master'>
-    <img src='https://coveralls.io/repos/github/enzsft/cli/badge.svg?branch=master' alt='Coverage Status' />
+  <a href="https://codecov.io/github/enzsft/cli?branch=master">
+    <img src="https://codecov.io/github/enzsft/cli/coverage.svg?branch=master" alt="Coverage via Codecov" />
   </a>
   <a href="https://www.npmjs.com/package/@enzsft/cli">
     <img src="https://badge.fury.io/js/%40enzsft%2Fcli.svg" alt="npm version">

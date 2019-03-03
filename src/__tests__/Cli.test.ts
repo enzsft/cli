@@ -1,10 +1,9 @@
-import { createCli, ICli } from "../cli";
-import { ICommand } from "../commands";
-import { ILogger } from "../logger";
+import { createCli } from "../cli";
+import { Cli, Command, Logger } from "../types";
 import { buildArgv } from "../test-utils/argv";
 import {
   createMockCommand,
-  IMockCommandOptions,
+  MockCommandOptions,
   mockBooleanOption,
   mockNumberOption,
   mockStringOption,
@@ -12,9 +11,9 @@ import {
 import { createMockLogger } from "../test-utils/mock-logger";
 
 describe("cli", () => {
-  let mockLogger: ILogger;
-  let mockCommand: ICommand<IMockCommandOptions>;
-  let cli: ICli;
+  let mockLogger: Logger;
+  let mockCommand: Command<MockCommandOptions>;
+  let cli: Cli;
   const cliDescription = "cli-description";
   const cliName = "cli-name";
 

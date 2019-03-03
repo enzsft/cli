@@ -1,5 +1,4 @@
-import { ICommand } from "../commands";
-import { ILogger } from "../logger";
+import { Command, Logger } from "../types";
 import {
   createBooleanOption,
   createNumberOption,
@@ -9,7 +8,7 @@ import {
 /**
  * Mock comands options
  */
-export interface IMockCommandOptions {
+export interface MockCommandOptions {
   /**
    * Should the values be aptizalized.
    */
@@ -41,12 +40,15 @@ export const mockStringOption = createStringOption({
 
 /**
  * Mock command for tests
+ *
+ * @param {Logger} logger A logger
+ * @returns {Command<MockCommandOptions>} A mock command
  */
 export const createMockCommand = (
-  logger: ILogger,
-): ICommand<IMockCommandOptions> => ({
+  logger: Logger,
+): Command<MockCommandOptions> => ({
   description: "A mock command for tests",
-  handler: (values: string[], options: IMockCommandOptions): Promise<void> => {
+  handler: (values: string[], options: MockCommandOptions): Promise<void> => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);
     }

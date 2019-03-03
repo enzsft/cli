@@ -1,8 +1,8 @@
+import { OptionType } from "../types";
 import {
   createBooleanOption,
   createNumberOption,
   createStringOption,
-  OptionType,
   transformParsedOptions,
 } from "../options";
 

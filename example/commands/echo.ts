@@ -1,15 +1,15 @@
-import { createBooleanOption, ICommand } from "../.."; // ... from "@enzsft/cli"
-import { ILogger } from "../services/logger";
+import { createBooleanOption, Command } from "../.."; // ... from "@enzsft/cli"
+import { Logger } from "../services/logger";
 
-export interface IEchoCommandOptions {
+export interface EchoCommandOptions {
   capitalize: boolean;
 }
 
 export const createEchoCommand = (
-  logger: ILogger,
-): ICommand<IEchoCommandOptions> => ({
+  logger: Logger,
+): Command<EchoCommandOptions> => ({
   description: "Echos back string values.",
-  handler: (values: string[], options: IEchoCommandOptions) => {
+  handler: (values: string[], options: EchoCommandOptions) => {
     for (const value of values) {
       logger.log(options.capitalize ? value.toUpperCase() : value);
     }

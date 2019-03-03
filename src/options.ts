@@ -1,123 +1,57 @@
-/**
- * Possible types of options.
- */
-export enum OptionType {
-  boolean = "boolean",
-  number = "number",
-  string = "string",
-}
-
-/**
- * An option.
- */
-export interface IOption<TType> {
-  /**
-   * An alternative name an option can be referenced by. This is output
-   * in --help,
-   */
-  altName?: string;
-  /**
-   * A description of the option. This is output in --help,
-   */
-  description: string;
-  /**
-   * The name of the option. This is output in --help,
-   */
-  name: string;
-  /**
-   * Parse option from a string parsed from Argv into the specified type.
-   */
-  parse: (value: string) => TType;
-  /**
-   * The type to parse the option to when it is injected into the
-   * commands handler.
-   */
-  type: OptionType;
-  /**
-   * Whether the option is required or not.
-   */
-  required: boolean;
-  /**
-   * The default value of the option if it not provided via Argv.
-   */
-  defaultValue?: TType;
-}
-
-/**
- * Config to build an option.
- */
-export interface IOptionConfig<TType> {
-  /**
-   * An alternative name an option can be referenced by. This is output
-   * in --help,
-   */
-  altName?: string;
-  /**
-   * A description of the option. This is output in --help,
-   */
-  description: string;
-  /**
-   * The name of the option. This is output in --help,
-   */
-  name: string;
-  /**
-   * Whether the option is required or not.
-   */
-  required: boolean;
-  /**
-   * The default value of the option if it not provided via Argv.
-   */
-  defaultValue?: TType;
-}
+import { Option, OptionConfig, OptionType } from "./types";
 
 /**
  * Create a boolean option.
  *
- * @param config
+ * @param {ConfigOption<boolean>} config Boolean option config
+ * @returns {Option<boolean>} A boolean
  */
 export const createBooleanOption = (
-  config: IOptionConfig<boolean>,
-): IOption<boolean> => ({
+  config: OptionConfig<boolean>,
+): Option<boolean> => ({
   ...config,
   parse: (x: string): boolean => x !== "false",
   type: OptionType.boolean,
 });
 
 /**
- * Create a boolean option.
+ * Create a number option.
  *
- * @param config
+ * @param {ConfigOption<number>} config Number option config
+ * @returns {Option<number>} A number
  */
 export const createNumberOption = (
-  config: IOptionConfig<number>,
-): IOption<number> => ({
+  config: OptionConfig<number>,
+): Option<number> => ({
   ...config,
   parse: (x: string): number => parseFloat(x),
   type: OptionType.number,
 });
 
 /**
- * Create a boolean option.
+ * Create a string option.
  *
- * @param config
+ * @param {ConfigOption<string>} config String option config
+ * @returns {Option<string>} A string
  */
 export const createStringOption = (
-  config: IOptionConfig<string>,
-): IOption<string> => ({
+  config: OptionConfig<string>,
+): Option<string> => ({
   ...config,
   parse: (x: string): string => x,
   type: OptionType.string,
 });
 
 /**
- * Transform an options object parsed from argv into an options object usable by a command
+ * Transform an options object parsed from argv into an options object usable by a command.
  *
- * @param options
- * @param commandOptions
+ * @param {any} options The options object to parse
+ * @param {Option<any>} commandOptions The options the command expects
+ * @returns {any} Object with parsed options
  */
 export const transformParsedOptions = (
   options: { [arg: string]: any },
-  commandOptions: Array<IOption<unknown>>,
+  commandOptions: Option<unknown>[],
 ): { [arg: string]: any } => {
   // Options names provided
   const providedNames = Object.keys(options);

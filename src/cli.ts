@@ -1,52 +1,20 @@
 import parseArgs from "minimist";
-import { ICommand } from "./commands";
-import { createLogger, ILogger } from "./logger";
+import { Cli, CliConfig, Logger } from "./types";
+import { createLogger } from "./logger";
 import { transformParsedOptions } from "./options";
 import { getHighestLength } from "./utils";
 
 /**
- * A CLI to parse Argv and run commands
- */
-export interface ICli {
-  /**
-   * Start the CLI
-   */
-  start: (argv: string[]) => Promise<void>;
-}
-
-/**
- * Config for CLI
- */
-export interface ICliConfig {
-  /**
-   * Commands that can be run
-   */
-  commands: Array<ICommand<any>>;
-  /**
-   * Description of the CLI tool. This is output in --help,
-   */
-  description: string;
-  /**
-   * Name of the CLI tool. This is output in --help and should match the
-   * executable name.
-   */
-  name: string;
-  /**
-   * Version of the CLI tool. This is output in --version
-   */
-  version: string;
-}
-
-/**
  * Create the default CLI
  *
- * @param config
- * @param logger
+ * @param {CliConfig} config Configuration
+ * @param {Logger} logger A logger
+ * @returns {Cli} A cli
  */
 export const createCli = (
-  config: ICliConfig,
-  logger: ILogger = createLogger(),
-): ICli => ({
+  config: CliConfig,
+  logger: Logger = createLogger(),
+): Cli => ({
   start: async (argv: string[]): Promise<void> => {
     const { _, ...options } = parseArgs(argv.slice(2));
 

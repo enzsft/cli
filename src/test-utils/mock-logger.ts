@@ -1,6 +1,6 @@
-import { ILogger } from "../logger";
+import { Logger } from "../types";
 
-export const createMockLogger = (): ILogger => ({
+export const createMockLogger = (): Logger => ({
   error: jest.fn(),
   info: jest.fn(),
   log: jest.fn(),

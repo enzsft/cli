@@ -1,9 +1,9 @@
-import { createCli, ICommand } from "../../.."; // ... from "@enzsft/cli"
+import { createCli, Command } from "../../.."; // ... from "@enzsft/cli"
 import { buildArgv } from "../../../test-utils"; // ... from "@enzsft/cli/test-utils"
-import { ILogger } from "../../services/logger";
-import { createEchoCommand, IEchoCommandOptions } from "../echo";
+import { Logger } from "../../services/logger";
+import { createEchoCommand, EchoCommandOptions } from "../echo";
 
-const createMockLogger = (): ILogger => ({
+const createMockLogger = (): Logger => ({
   error: jest.fn(),
   info: jest.fn(),
   log: jest.fn(),
@@ -12,8 +12,8 @@ const createMockLogger = (): ILogger => ({
 
 describe("Echo", () => {
   const values = ["one", "two", "three"];
-  let mockLogger: ILogger;
-  let echoCommand: ICommand<IEchoCommandOptions>;
+  let mockLogger: Logger;
+  let echoCommand: Command<EchoCommandOptions>;
   const description = "cli-description";
   const name = "cli-name";
   const version = "1.0.0";

@@ -1,11 +1,10 @@
-import { ICommand } from "../../commands";
-import { ILogger } from "../../logger";
-import { createMockCommand, IMockCommandOptions } from "../mock-command";
+import { Command, Logger } from "../../types";
+import { createMockCommand, MockCommandOptions } from "../mock-command";
 import { createMockLogger } from "../mock-logger";
 
 describe("MockCommand", () => {
-  let mockLogger: ILogger;
-  let mockCommand: ICommand<IMockCommandOptions>;
+  let mockLogger: Logger;
+  let mockCommand: Command<MockCommandOptions>;
 
   beforeEach(() => {
     mockLogger = createMockLogger();

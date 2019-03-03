@@ -1,6 +1,6 @@
 // tslint:disable no-console
 
-export interface ILogger {
+export interface Logger {
   error: (message?: any) => void;
   info: (message?: any) => void;
   log: (message?: any) => void;
@@ -9,8 +9,9 @@ export interface ILogger {
 
 /**
  * Simple logger
+ * @returns {Logger} A logger
  */
-export const createLogger = (): ILogger => ({
+export const createLogger = (): Logger => ({
   error: console.error,
   info: console.info,
   log: console.log,

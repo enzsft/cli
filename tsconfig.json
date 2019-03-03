@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "lib": ["es2017"],
-    "noEmit": true,
+    "outDir": ".build",
     "strict": true
   },
   "exclude": [".build", "coverage", "node_modules", "**/*.test.ts"],

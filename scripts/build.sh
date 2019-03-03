@@ -10,6 +10,8 @@ babel src --out-dir .build/src --extensions ".ts"
 babel index.ts --out-file .build/index.js
 babel test-utils.ts --out-file .build/test-utils.js
 
+# Output type declarations
+tsc
 
 # Copy files
 cp README.md .build/README.md

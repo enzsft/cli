@@ -19,13 +19,20 @@
     "example": "ts-node example/index.ts",
     "lint": "eslint . --ext .js,.ts",
     "npm-publish": "./scripts/publish.sh",
-    "test": "jest"
+    "test": "jest",
+    "type": "tsc"
   },
   "dependencies": {
     "minimist": "^1.2.0",
     "string-argv": "^0.1.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
     "@types/jest": "^23.3.12",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.12.18",
@@ -44,7 +51,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "./scripts/quality-check.sh"
+      "pre-commit": "./scripts/precommit.sh"
     }
   }
 }

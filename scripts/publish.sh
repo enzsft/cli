@@ -2,8 +2,11 @@
 
 set -e
 
-# Assert quality (includes build)
-./scripts/quality-check.sh
+# Build and check quality
+yarn build
+yarn lint
+yarn type
+yarn test --coverage
 
 # Move into newly built package
 cd .build

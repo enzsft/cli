@@ -2,9 +2,9 @@
   "compilerOptions": {
     "esModuleInterop": true,
     "lib": ["es2017"],
-    "outDir": ".build",
+    "noEmit": true,
     "strict": true
   },
   "exclude": [".build", "coverage", "node_modules", "**/*.test.ts"],
-  "include": ["index.ts", "test-utils.ts", "src/**/*.ts"]
+  "include": ["index.ts", "test-utils.ts", "src"]
 }

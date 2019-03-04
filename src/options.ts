@@ -3,8 +3,8 @@ import { Option, OptionConfig, OptionType } from "./types";
 /**
  * Create a boolean option.
  *
- * @param {ConfigOption<boolean>} config Boolean option config
- * @returns {Option<boolean>} A boolean
+ * @param {Object} config Boolean option config
+ * @returns {Object} A boolean
  */
 export const createBooleanOption = (
   config: OptionConfig<boolean>,
@@ -17,8 +17,8 @@ export const createBooleanOption = (
 /**
  * Create a number option.
  *
- * @param {ConfigOption<number>} config Number option config
- * @returns {Option<number>} A number
+ * @param {Object} config Number option config
+ * @returns {Object} A number
  */
 export const createNumberOption = (
   config: OptionConfig<number>,
@@ -31,8 +31,8 @@ export const createNumberOption = (
 /**
  * Create a string option.
  *
- * @param {ConfigOption<string>} config String option config
- * @returns {Option<string>} A string
+ * @param {Object} config String option config
+ * @returns {Object} A string
  */
 export const createStringOption = (
   config: OptionConfig<string>,
@@ -45,9 +45,9 @@ export const createStringOption = (
 /**
  * Transform an options object parsed from argv into an options object usable by a command.
  *
- * @param {any} options The options object to parse
- * @param {Option<any>} commandOptions The options the command expects
- * @returns {any} Object with parsed options
+ * @param {Object} options The options object to parse
+ * @param {Object} commandOptions The options the command expects
+ * @returns {Object} Object with parsed options
  */
 export const transformParsedOptions = (
   options: { [arg: string]: any },

@@ -7,9 +7,9 @@ import { getHighestLength } from "./utils";
 /**
  * Create the default CLI
  *
- * @param {CliConfig} config Configuration
- * @param {Logger} logger A logger
- * @returns {Cli} A cli
+ * @param {Object} config Configuration
+ * @param {Object} logger A logger
+ * @returns {Object} A cli
  */
 export const createCli = (
   config: CliConfig,

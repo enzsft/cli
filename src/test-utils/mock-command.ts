@@ -41,8 +41,8 @@ export const mockStringOption = createStringOption({
 /**
  * Mock command for tests
  *
- * @param {Logger} logger A logger
- * @returns {Command<MockCommandOptions>} A mock command
+ * @param {Object} logger A logger
+ * @returns {Object} A mock command
  */
 export const createMockCommand = (
   logger: Logger,

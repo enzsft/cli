@@ -3,7 +3,7 @@ import { Logger } from "./types";
 /**
  * A simple console logger.
  *
- * @returns {Logger} A logger
+ * @returns {Object} A logger
  */
 export const createLogger = (): Logger => ({
   error: console.error,
